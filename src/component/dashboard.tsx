@@ -17,7 +17,7 @@ type card = {
 const DashBoard = () => {
 	const { activeTab } = useTab()
 
-	let currentDisplayedTab = activeTab === 'token' ? token : whales
+	const currentDisplayedTab = activeTab === 'token' ? token : whales
 
 	return (
 		<main className="flex flex-col relative min-h-screen md:ml-[288px] md:px-8">
