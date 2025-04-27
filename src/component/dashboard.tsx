@@ -20,17 +20,15 @@ const DashBoard = () => {
 	let currentDisplayedTab = activeTab === 'token' ? token : whales
 
 	return (
-		<main className="flex flex-col ml-[288px] relative px-8 min-h-screen">
-			<div className='sticky top-0 pt-10 bg-[#0E0E0D]'>
+		<main className="flex flex-col relative min-h-screen md:ml-[288px] md:px-8">
+			<div className="sticky top-[56px] bg-[#0E0E0D] px-4 md:pt-10 md:top-0 md:px-0">
 				<div className="flex justify-end">
 					<WalletMultiButton />
 				</div>
 				<Navbar />
 			</div>
 			<section
-				className={`my-6 grid grid-cols-[repeat(auto-fit,minmax(${
-					activeTab === 'token' ? '240px' : '350px'
-				},1fr))] justify-items-center gap-10`}
+				className={`my-18 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-center gap-4 px-4 md:gap-10 md:my-6 md:px-0`}
 			>
 				{currentDisplayedTab.map(
 					({
