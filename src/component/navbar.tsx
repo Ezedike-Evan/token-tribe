@@ -5,7 +5,7 @@ import { useTab } from '@/contexts/navbarContext'
 const Navbar = () => {
 	const {activeTab, setActiveTab} = useTab()
 	return (
-		<section className="flex flex-col mt-10 gap-5">
+		<section className="flex flex-col mt-6 gap-5">
 			<div className="flex border items-center rounded-xl px-4 gap-3">
 				<FaSearch size={24} />
 				<input

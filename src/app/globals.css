@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1E1E1E;
+  --background: #0E0E0D;
   --foreground: #ffffff;
   --font-inter: 'Inter', sans-serif;
 }
@@ -15,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1E1E1E;
+    --background: #0E0E0D;
     --foreground: #ffffff;
   }
 }
@@ -29,4 +29,19 @@ body {
 
 .font-tradewinds {
   font-family: 'Trade Winds', cursive;
+}
+.token-card,
+.whale-card{
+  background-color: #161615;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+  border-radius: 16px;
+}
+.token-card img{
+  border-radius: 8px;
+}
+.whale-card{
+  min-width: 350px;
 }
