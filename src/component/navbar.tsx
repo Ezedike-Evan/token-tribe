@@ -1,8 +1,9 @@
-import { act, useState } from 'react'
+import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
+import { useTab } from '@/contexts/navbarContext'
 
 const Navbar = () => {
-	const [activeTab, setActiveTab] = useState<'token' | 'whales'>('token')
+	const {activeTab, setActiveTab} = useTab()
 	return (
 		<section className="flex flex-col mt-10 gap-5">
 			<div className="flex border items-center rounded-xl px-4 gap-3">

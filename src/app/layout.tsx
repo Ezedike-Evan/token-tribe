@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import WalletContext from '../contexts/walletContext'
+import { TabProvider } from '@/contexts/navbarContext'
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -31,7 +32,9 @@ export default function RootLayout({
 				/>
 			</head>
 			<body>
-				<WalletContext>{children}</WalletContext>
+				<WalletContext>
+					<TabProvider>{children}</TabProvider>
+				</WalletContext>
 			</body>
 		</html>
 	)
