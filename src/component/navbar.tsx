@@ -1,6 +1,7 @@
 import { FaSearch } from 'react-icons/fa'
 import { useTab } from '@/contexts/navbarContext'
 
+
 const Navbar = () => {
 	const {activeTab, setActiveTab} = useTab()
 	return (
@@ -24,6 +25,7 @@ const Navbar = () => {
 					} px-6 py-1 rounded-md cursor-pointer md:px-20`}
 					onClick={() => {
 						setActiveTab('token')
+						document.title = 'Token Tribe | Token Archives'
 					}}
 				>
 					Token Archive
@@ -34,6 +36,7 @@ const Navbar = () => {
 					} px-6 py-1 rounded-md cursor-pointer md:px-20`}
 					onClick={() => {
 						setActiveTab('whales')
+						document.title = 'Token Tribe | Vault of Whales'
 					}}
 				>
 					Vault Of Whales

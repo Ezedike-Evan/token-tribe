@@ -1,12 +1,24 @@
 import '@solana/wallet-adapter-react-ui/styles.css'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { LiaUserNinjaSolid } from 'react-icons/lia'
 import { GiCancel } from "react-icons/gi"
 import { FaRegUserCircle } from "react-icons/fa"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { UserButton } from "@civic/auth/react"
+import { userHasWallet } from "@civic/auth-web3"
+import { useUser } from "@civic/auth-web3/react"
 
 const Profile = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
+
+	useEffect(()=>{
+		const afterLogin = async () => {
+			const userContext = await useUser()
+			console.log('user context',userContext) 
+			if (userContext.user && !userHasWallet(userContext)) {
+			  await userContext.createWallet()
+			}
+		}
+	},[])
 	return (
 		<>
 			<div className="fixed top-0 left-0 w-full flex items-center justify-between bg-[#0E0E0D] px-4 py-3 md:hidden z-40">
@@ -30,8 +42,7 @@ const Profile = () => {
 					/>
 				</div>
 				<div className="flex flex-col items-center gap-16">
-					<WalletMultiButton />
-					<p>mode switch</p>
+					<UserButton />
 				</div>
 			</aside>
 		</>
