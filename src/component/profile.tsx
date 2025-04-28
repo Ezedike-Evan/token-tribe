@@ -9,11 +9,9 @@ import { useUser } from "@civic/auth-web3/react"
 
 const Profile = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
+	const userContext = useUser()
 	
 	const afterLogin = async () => {
-		console.log('user use',useUser())
-		const userContext = await useUser()
-		console.log('user context',userContext) 
 		if (userContext.user && !userHasWallet(userContext)) {
 		  await userContext.createWallet()
 		}
