@@ -9,16 +9,19 @@ import { useUser } from "@civic/auth-web3/react"
 
 const Profile = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
+	
+	const afterLogin = async () => {
+		console.log('user use',useUser())
+		const userContext = await useUser()
+		console.log('user context',userContext) 
+		if (userContext.user && !userHasWallet(userContext)) {
+		  await userContext.createWallet()
+		}
+	}
 
 	useEffect(()=>{
-		const afterLogin = async () => {
-			const userContext = await useUser()
-			console.log('user context',userContext) 
-			if (userContext.user && !userHasWallet(userContext)) {
-			  await userContext.createWallet()
-			}
-		}
-	},[])
+		afterLogin()
+	},[useUser().user,useUser().authStatus,useUser().isLoading])
 	return (
 		<>
 			<div className="fixed top-0 left-0 w-full flex items-center justify-between bg-[#0E0E0D] px-4 py-3 md:hidden z-40">
@@ -43,6 +46,7 @@ const Profile = () => {
 				</div>
 				<div className="flex flex-col items-center gap-16">
 					<UserButton />
+					main switch
 				</div>
 			</aside>
 		</>

@@ -2,7 +2,6 @@ import '@solana/wallet-adapter-react-ui/styles.css'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import Navbar from './navbar'
 import { useTab } from '@/contexts/navbarContext'
-import { UserButton } from "@civic/auth/react"
 
 type card = {
 	imgURL?: string
