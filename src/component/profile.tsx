@@ -19,7 +19,7 @@ const Profile = () => {
 
 	useEffect(()=>{
 		afterLogin()
-	},[useUser().user,useUser().authStatus,useUser().isLoading])
+	},[userContext.user,userContext.authStatus,userContext.isLoading])
 	return (
 		<>
 			<div className="fixed top-0 left-0 w-full flex items-center justify-between bg-[#0E0E0D] px-4 py-3 md:hidden z-40">
