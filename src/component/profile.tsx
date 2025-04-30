@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import { UserButton } from "@civic/auth/react"
 import { userHasWallet } from "@civic/auth-web3"
 import { useUser } from "@civic/auth-web3/react"
-import ThemeToggle from './themeToggle'
 
 const Profile = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
