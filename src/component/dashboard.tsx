@@ -23,7 +23,7 @@ const DashBoard = () => {
 	const { data, isLoading } = useSolscanTokenData()
 	const { data: whaleData } = useSolscanWhaleData()
 	const tokenFilteredData = data?.data.filter(
-		(item: any) =>
+		(item: { name: string; price: number }) =>
 			typeof item.name === 'string' &&
 			item.name.trim() !== '' &&
 			typeof item.price === 'number'
@@ -106,7 +106,9 @@ const DashBoard = () => {
 									</div>
 								</div>
 								{activeTab === 'token' && (
-									<p className='text-[10px] font-bold text-center mt-5'>click to view details and risk assessment from dd.xyz</p>
+									<p className="text-[10px] font-bold text-center mt-5">
+										click to view details and risk assessment from dd.xyz
+									</p>
 								)}
 							</div>
 						)
