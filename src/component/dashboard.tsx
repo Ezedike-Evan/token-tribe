@@ -2,22 +2,36 @@ import '@solana/wallet-adapter-react-ui/styles.css'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import Navbar from './navbar'
 import { useTab } from '@/contexts/navbarContext'
+import { useSolscanTokenData } from '@/hooks/usesolscandata'
+import { useSolscanWhaleData } from '@/hooks/usesolscandata'
 
 type card = {
 	imgURL?: string
-	token?: string
-	whale?: string
-	price?: string
+	name?: string
+	account?: string
+	price?: number
 	walletAddress?: string
-	capbal: number
-	rating?: number
-	mostTradedAsset?: string
+	address?: string
+	symbol?: string
+	total_values?: number
+	sol_values?: number
 }
 
 const DashBoard = () => {
 	const { activeTab } = useTab()
 
-	const currentDisplayedTab = activeTab === 'token' ? token : whales
+	const { data, isLoading } = useSolscanTokenData()
+	const { data: whaleData } = useSolscanWhaleData()
+	const tokenFilteredData = data?.data.filter(
+		(item: any) =>
+			typeof item.name === 'string' &&
+			item.name.trim() !== '' &&
+			typeof item.price === 'number'
+	)
+	console.log('whales data ', whaleData?.data?.data)
+
+	const currentDisplayedTab =
+		activeTab === 'token' ? tokenFilteredData : whaleData?.data?.data
 
 	return (
 		<main className="flex flex-col relative min-h-screen md:ml-[288px] md:px-8">
@@ -30,58 +44,72 @@ const DashBoard = () => {
 			<section
 				className={`my-18 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] justify-center gap-4 px-4 md:gap-10 md:my-6 md:px-0`}
 			>
-				{currentDisplayedTab.map(
-					({
-						token,
-						whale,
-						price,
-						walletAddress,
-						imgURL,
-						capbal,
-						rating,
-						mostTradedAsset,
-					}: card) => (
-						<div
-							key={token || whale}
-							className={activeTab === 'token' ? 'token-card' : 'whale-card'}
-						>
+				{isLoading ? (
+					<p>Loading...</p>
+				) : (
+					currentDisplayedTab.map(
+						({
+							name,
+							account,
+							price,
+							address,
+							symbol,
+							total_values,
+							sol_values,
+						}: card) => (
 							<div
-								className={`flex gap-4 ${
-									activeTab === 'token' ? 'flex-col' : 'items-center'
-								} `}
+								key={name || account}
+								className={activeTab === 'token' ? 'token-card' : 'whale-card'}
 							>
-								<img
-									src={imgURL || '/globe.svg'}
-									className={`${
-										activeTab === 'token' ? 'w-full' : 'size-16 rounded-full'
-									}`}
-								/>
-								<div>
-									<h3 className="font-semibold capitalize text-xl">
-										{token || whale}
-									</h3>
-									<p className="font-medium text-xs text-[#ffffff80]">{`$${
-										price || walletAddress
-									}`}</p>
+								<div
+									className={`flex gap-4 ${
+										activeTab === 'token' ? 'flex-col' : 'items-center'
+									} `}
+								>
+									<img
+										src={
+											'https://tse2.mm.bing.net/th/id/OIP.snGQVKaMS-otJyoj8RqWFgHaEm?rs=1&pid=ImgDetMain'
+										}
+										className={`${
+											activeTab === 'token' ? 'w-full' : 'size-16 rounded-full'
+										}`}
+									/>
+									<div>
+										<h3 className="font-semibold capitalize text-xl w-[200px] truncate ">
+											{name || account}
+										</h3>
+										<p className="font-medium text-xs text-[#ffffff80] max-w-[200px] break-words">
+											{address || account}
+										</p>
+									</div>
 								</div>
+								<div className="flex justify-between mt-6">
+									<div>
+										<p className="font-semibold text-sm">
+											{activeTab === 'token' ? 'Price' : 'Wallet Balance'}
+										</p>
+										<p className="font-semibold text-xs text-[#ffffff80] break-words">
+											{activeTab === 'token'
+												? `$${price}`
+												: `$${total_values?.toLocaleString()}`}
+										</p>
+									</div>
+									<div>
+										<p className="font-semibold text-sm">
+											{activeTab === 'token' ? 'Symbol' : 'Solana Amount'}
+										</p>
+										<p className="font-semibold text-xs text-[#ffffff80]">
+											{activeTab === 'token'
+												? symbol
+												: `$${sol_values?.toLocaleString()}`}
+										</p>
+									</div>
+								</div>
+								{activeTab === 'token' && (
+									<p className='text-[10px] font-bold text-center mt-5'>click to view details and risk assessment from dd.xyz</p>
+								)}
 							</div>
-							<div className="flex justify-between mt-6">
-								<div>
-									<p className="font-semibold text-sm">
-										{activeTab === 'token' ? 'Market Cap' : 'Wallet Balance'}
-									</p>
-									<p className="font-semibold text-xs text-[#ffffff80]">{`$${capbal}`}</p>
-								</div>
-								<div>
-									<p className="font-semibold text-sm">
-										{activeTab === 'token' ? 'Rating' : 'Most Traded Asset'}
-									</p>
-									<p className="font-semibold text-xs text-[#ffffff80]">
-										{activeTab === 'token' ? `${rating}/10` : mostTradedAsset}
-									</p>
-								</div>
-							</div>
-						</div>
+						)
 					)
 				)}
 			</section>

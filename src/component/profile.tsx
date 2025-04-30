@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { UserButton } from "@civic/auth/react"
 import { userHasWallet } from "@civic/auth-web3"
 import { useUser } from "@civic/auth-web3/react"
+import ThemeToggle from './themeToggle'
 
 const Profile = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -42,9 +43,8 @@ const Profile = () => {
 						className="border-10 rounded-full mt-[60px]"
 					/>
 				</div>
-				<div className="flex flex-col items-center gap-16">
+				<div className="mb-[64px]">
 					<UserButton />
-					main switch
 				</div>
 			</aside>
 		</>
