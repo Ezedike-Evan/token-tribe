@@ -25,11 +25,11 @@ A decentralized web application that combines seamless Web3 authentication, real
 
 ## 🌐 Live Demo
 
-👉 [Visit the app](https://yourdomain.com)
+👉 [Visit the app](https://solanatokentribe.vercel.app/)
 
 ## 🧠 How It Works
 
-1. **User logs in** via Civic with their connected wallet.
+1. **User logs in** via Civic Auth.
 2. They can **input or browse Solana token addresses**.
 3. The app uses the **Solscan API** to fetch token metadata and activity.
 4. The token’s **security risk profile** is fetched from dd.xyz.
